@@ -16,8 +16,20 @@ public class App {
 
     public static void main(String[] args) {
         final AmazonSQS sqs = AmazonSQSClientBuilder.defaultClient();
+        String queue = "";
+        switch (args[0]){
+            case "a":
+                queue +="url/messageQueueA";
+                break;
+            case "b":
+                queue +="url/messageQueueB";
+                break;
+            case "c":
+                queue +="url/messageQueueC";
+                break;
+        }
 
-        List<Message> messages = sqs.receiveMessage("https://sqs.us-west-2.amazonaws.com/424220637898/messageQueue").getMessages();
+        List<Message> messages = sqs.receiveMessage(queue).getMessages();
         System.out.println(messages.toString());
         //System.out.println(new App().getGreeting());
     }
